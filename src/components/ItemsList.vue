@@ -38,16 +38,16 @@ const layouts = [
 export default {
   data() {
     return {
-      items: []
+      items: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
     };
   },
   mounted() {
-    console.log(
-      `🦄🦄`,
-      new Array(10).map(i => ({
+    this.items = this.items.map(i => {
+      return {
         bgColor: this.randomColor()
-      }))
-    );
+      };
+    });
+    console.log(`🦄🦄`, this.items);
   },
   computed: {
     gridAreas() {
@@ -82,7 +82,7 @@ ${layout.template
     moarItems() {
       this.items = [
         ...this.items,
-        ...new Array(10).map(i => ({
+        ...this.items.splice(0, 10).map(i => ({
           bgColor: this.randomColor()
         }))
       ];
