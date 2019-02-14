@@ -6,7 +6,7 @@
         :key="index"
         class="grid__item"
         :style="{
-          'background-color': randomColor(),
+          'background-color': item.bgColor,
           'grid-area': `a${index}`
         }"
       >
@@ -38,8 +38,16 @@ const layouts = [
 export default {
   data() {
     return {
-      items: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+      items: []
     };
+  },
+  mounted() {
+    console.log(
+      `🦄🦄`,
+      new Array(10).map(i => ({
+        bgColor: this.randomColor()
+      }))
+    );
   },
   computed: {
     gridAreas() {
@@ -72,8 +80,12 @@ ${layout.template
       return color;
     },
     moarItems() {
-      this.items = [...this.items, ...this.items.splice(0, 20)];
-      console.log(this.items.length);
+      this.items = [
+        ...this.items,
+        ...new Array(10).map(i => ({
+          bgColor: this.randomColor()
+        }))
+      ];
     }
   }
 };
